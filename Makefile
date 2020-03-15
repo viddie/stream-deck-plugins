@@ -2,26 +2,51 @@ RELEASE_FOLDER=./dist
 BUILD_FOLDER=./build
 INSTALL_FOLDER=../Plugins
 
-SD_DICE=com.viddie.dice.sdPlugin
-SD_DICE_PLUGIN=com.viddie.dice.streamDeckPlugin
+SD_DICE=com.viddie.dice
+SD_COUNTER=com.viddie.counter
 
+TARGET=none
 
-install_sdDice: build_sdDice
-	cp $(BUILD_FOLDER)/$(SD_DICE) $(INSTALL_FOLDER)/$(SD_DICE)
+install_sdDice: TARGET=$(SD_DICE)
+install_sdDice: install_all
 	
-build_sdDice: clean_sdDice
+build_sdDice: TARGET=$(SD_DICE)
+build_sdDice: build_all
+	
+clean_sdDice: TARGET=$(SD_DICE)
+clean_sdDice: clean_all
+	
+	
+	
+install_sdCounter: TARGET=$(SD_COUNTER)
+install_sdCounter: install_all
+	
+build_sdCounter: TARGET=$(SD_COUNTER)
+build_sdCounter: build_all
+	
+clean_sdCounter: TARGET=$(SD_COUNTER)
+clean_sdCounter: clean_all
+	
+	
+	
+	
+	
+install_all: build_all
+	cp -r $(BUILD_FOLDER)/$(TARGET).sdPlugin $(INSTALL_FOLDER)/$(TARGET).sdPlugin
+	
+build_all: clean_all
 	mkdir -p $(RELEASE_FOLDER)
 	mkdir -p $(BUILD_FOLDER)
-	mkdir -p $(BUILD_FOLDER)/$(SD_DICE)
-	cp $(SD_DICE)/manifest.json $(BUILD_FOLDER)/$(SD_DICE)/manifest.json
-	cp $(SD_DICE)/index.html $(BUILD_FOLDER)/$(SD_DICE)/index.html
-	cp -r $(SD_DICE)/js $(BUILD_FOLDER)/$(SD_DICE)/
-	cp -r $(SD_DICE)/propertyinspector $(BUILD_FOLDER)/$(SD_DICE)/
-	cp -r $(SD_DICE)/images $(BUILD_FOLDER)/$(SD_DICE)/
-	DistributionTool -b -i $(BUILD_FOLDER)/$(SD_DICE) -o $(RELEASE_FOLDER)
+	mkdir -p $(BUILD_FOLDER)/$(TARGET).sdPlugin
+	cp $(TARGET).sdPlugin/manifest.json $(BUILD_FOLDER)/$(TARGET).sdPlugin/manifest.json
+	cp $(TARGET).sdPlugin/index.html $(BUILD_FOLDER)/$(TARGET).sdPlugin/index.html
+	cp -r $(TARGET).sdPlugin/js $(BUILD_FOLDER)/$(TARGET).sdPlugin/
+	cp -r $(TARGET).sdPlugin/propertyinspector $(BUILD_FOLDER)/$(TARGET).sdPlugin/
+	cp -r $(TARGET).sdPlugin/images $(BUILD_FOLDER)/$(TARGET).sdPlugin/
+	DistributionTool -b -i $(BUILD_FOLDER)/$(TARGET).sdPlugin -o $(RELEASE_FOLDER)
 	
-clean_sdDice:
-	rm -rf $(BUILD_FOLDER)/$(SD_DICE) $(RELEASE_FOLDER)/$(SD_DICE_PLUGIN)
+clean_all:
+	rm -rf $(BUILD_FOLDER)/$(TARGET).sdPlugin $(RELEASE_FOLDER)/$(TARGET).streamDeckPlugin
 	
 	
 	
