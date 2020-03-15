@@ -1,0 +1,3 @@
+[submodule "com.viddie.dice.sdPlugin"]
+	path = com.viddie.dice.sdPlugin
+	url = https://github.com/viddie/sdDice.git
